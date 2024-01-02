@@ -10,3 +10,7 @@ body {
 .section-container {
     @apply max-w-screen-2xl container mx-auto lg:px-14
 }
+
+.heartIcon {
+    border-radius: 0px 25.5px 0px 20.5px;
+}
