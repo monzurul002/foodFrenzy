@@ -6,20 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useRef, useState } from "react";
 import Card from "../../../components/Card";
 
-const simpleArrowNext = (props) => {
-    const { className, onClick, style } = props;
-    return (
-        <div className={className} style={{ ...style, display: "block", background: "red" }} onClick={onClick}>Next</div>
-    )
-}
-const simpleArrowPrev = (props) => {
-    const { className, onClick, style } = props;
-    return (
-        <div className={className} style={{ ...style, display: "block", background: "green" }} onClick={onClick}>Prev</div>
-    )
-}
-
-
 const SpecialDishes = () => {
     const [recipes, setRecipes] = useState([]);
     const slider = useRef(null)
@@ -72,9 +58,9 @@ const SpecialDishes = () => {
 
     return (
         <div className="section-container py-14">
-            <p className=" uppercase text-red">Special Dishes</p>
-            <div className="flex justify-between">
-                <h2 className="font-bold text-4xl py-2 ">Standout Dishes From Our Menu</h2>
+            <p className=" uppercase text-red px-4">Special Dishes</p>
+            <div className="flex justify-between px-4">
+                <h2 className="font-bold  text-3xl md:text-4xl py-2 ">Standout Dishes From Our Menu</h2>
                 {/* icon */}
                 <div className="flex justify-between gap-3">
                     <button onClick={() => slider.current.slickPrev()} className="btn hover:bg-green hover:text-white rounded-full"><IoIosArrowBack className="text-xl " /></button>

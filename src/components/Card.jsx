@@ -22,9 +22,10 @@ const Card = ({ item }) => {
                 </figure></Link>
                 <div className="card-body">
                     <h2 className="card-title">{item.name}</h2>
-                    <h2 className="card-title font-bold"><span className="text-red">$</span>{item.price}</h2>
+
                     <p>If a dog chews shoes whose shoes does he choose?</p>
                     <div className="card-actions justify-between items-center">
+                        <h2 className="card-title font-bold"><span className="text-red">$</span>{item.price}</h2>
                         <button className="btn bg-green text-white">Buy Now</button>
                     </div>
                 </div>

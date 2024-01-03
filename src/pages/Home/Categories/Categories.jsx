@@ -26,7 +26,7 @@ const Categories = () => {
     return (
         <div className="section-container py-5">
             <div className="text-center py-8">
-                <h2 className="text-bold text-red">Custom Favourites</h2>
+                <h2 className=" text-red tex-xl font-semibold">Custom Favourites</h2>
                 <h1 className="font-bold text-4xl">
                     Popular Catagories
                 </h1>
