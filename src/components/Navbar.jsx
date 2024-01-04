@@ -3,6 +3,8 @@ import logo from "../assets/logo.png";
 import { IoSearchSharp } from "react-icons/io5";
 import { LuPhoneCall } from "react-icons/lu";
 import { useEffect, useState } from "react";
+import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
 
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false)
@@ -100,8 +102,15 @@ const Navbar = () => {
 
                     </div>
 
-                    <button className="btn bg-green rounded-full text-white "><LuPhoneCall className="inline-block" />Contact
+                    <button className="btn bg-green rounded-full  text-white "><LuPhoneCall className="inline-block" />Contact
                     </button>
+                    {/* login  */}
+
+                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-green rounded-full	 text-white "><FaRegUser className="inline-block" />Login
+                    </button>
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+                    <Modal />
 
                 </div>
             </div>
