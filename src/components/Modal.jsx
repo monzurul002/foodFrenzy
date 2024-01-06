@@ -1,6 +1,8 @@
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Contexts/AuthProviders";
 
 const Modal = () => {
     const {
@@ -8,9 +10,52 @@ const Modal = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
+    const { user, googleSignIn, signInWithEmailPassword } = useContext(AuthContext)
+    const [errorMessage, setErrorMessage] = useState("")
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/"
+    const onSubmit = (data) => {
 
-    const onSubmit = (data) => console.log(data)
+        const email = data.email;
+        const password = data.password;
 
+        signInWithEmailPassword(email, password)
+            .then(result => {
+                const user = result.user;
+
+                if (user) {
+
+                    alert("Successfully login")
+                    return navigate(from, { replace: true })
+                }
+                setErrorMessage("")
+
+            })
+            .catch(error => {
+                const message = error?.message;
+                console.log(error);
+                return setErrorMessage("Provide corect email and Password.")
+            })
+
+    }
+
+
+    //handle googleLogin
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    alert("Login Successfull")
+                    return navigate(from, { replace: true })
+                }
+            })
+            .catch(error => {
+                const message = error.message;
+
+            })
+    }
     return (
         <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
             <div className="modal-box ">
@@ -40,6 +85,9 @@ const Modal = () => {
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
+                            {
+                                errorMessage && <p className="text-red">{errorMessage}</p>
+                            }
                         </div>
                         <div className="form-control mt-1">
                             <input type="submit" className="btn bg-green text-white" value="Login"></input>
@@ -54,7 +102,7 @@ const Modal = () => {
 
                     {/* social media login  */}
                     <div className="text-center mb-4 space-x-2">
-                        <button className="btn btn-circle bg-slate-300 hover:bg-green hover:text-white">
+                        <button onClick={() => handleGoogleLogin()} className="btn btn-circle bg-slate-300 hover:bg-green hover:text-white">
                             <FaGoogle />
                         </button>
                         <button className="btn btn-circle bg-slate-300 hover:bg-green hover:text-white">

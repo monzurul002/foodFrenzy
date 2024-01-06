@@ -2,13 +2,16 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { IoSearchSharp } from "react-icons/io5";
 import { LuPhoneCall } from "react-icons/lu";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
+import { AuthContext } from "../Contexts/AuthProviders";
+import Profile from "./Profile";
 
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false)
-
+    const { user, } = useContext(AuthContext);
+    console.log(user);
     useEffect(() => {
         const handleScroll = () => {
             const offset = window.scrollY;
@@ -74,7 +77,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <div className="navbar-end flex gap-1 md:gap-3">
+                <div className="navbar-end flex flex-row gap-1 md:gap-3">
 
                     {/* search btn */}
                     <div className="btn btn-ghost btn-circle hidden lg:flex">
@@ -99,15 +102,19 @@ const Navbar = () => {
                             </div>
                         </div>
 
-
                     </div>
+
 
                     <button className="btn bg-green rounded-full  text-white "><LuPhoneCall className="inline-block" />Contact
                     </button>
                     {/* login  */}
 
-                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-green rounded-full	 text-white "><FaRegUser className="inline-block" />Login
-                    </button>
+                    {
+                        user ? <Profile user={user} /> : <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-green rounded-full	 text-white "><FaRegUser className="inline-block" />Login
+                        </button>
+                    }
+
+
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
 
                     <Modal />

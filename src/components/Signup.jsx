@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/AuthProviders";
 
 const Signup = () => {
     const {
@@ -9,8 +11,27 @@ const Signup = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
+    const { user, createNewUser } = useContext(AuthContext)
 
-    const onSubmit = (data) => console.log(data)
+
+    const onSubmit = (data) => {
+
+        const email = data.email;
+        const password = data.password;
+
+
+        createNewUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                if (user) {
+                    return alert("Successfully crated user")
+                }
+            })
+            .catch(error => {
+                const message = error?.message;
+            })
+    }
 
     return (
         <div>
