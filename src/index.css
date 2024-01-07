@@ -21,3 +21,9 @@ body {
     font-weight: 600;
     color: #39D49A;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

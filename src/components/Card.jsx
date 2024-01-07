@@ -1,14 +1,60 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import { AuthContext } from "../Contexts/AuthProviders";
+import Swal from "sweetalert2";
+import useCart from "../hooks/useCart";
 
 
 const Card = ({ item }) => {
-
+    const { user } = useContext(AuthContext)
     const [isHeartedFilled, setIsHeartedFilled] = useState(false);
+    const { _id, name, recipe, image, category, price } = item;
+    const { refetch } = useCart()
+    const navigate = useNavigate();
+    const location = useLocation()
     const handleHeartClick = () => {
         setIsHeartedFilled(!isHeartedFilled)
     }
+    const handldeAddToCart = (item) => {
+        if (user && user?.email) {
+            const cartItem = { menuItemId: _id, name, image, price, quantity: 1, email: user?.email, recipe, category }
+            console.log(cartItem);
+            fetch("http://localhost:5000/cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(cartItem)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch()
+                        return Swal.fire({
+                            title: "Good job!",
+                            text: "Item has been added to cart!",
+                            icon: "success"
+                        });
+                    }
+                    else {
+                        return Swal.fire({
+                            title: "Error",
+                            text: "Item has already been added to cart!",
+                            icon: "error"
+                        });
+                    }
+                })
+        }
+        else {
+            navigate('/signup', { state: { from: location } })
+            return Swal.fire({
+                title: "Login first",
+                icon: "error"
+            });
+        }
+    }
+
     return (
         <div className="mx-4">
             <div className="card card-compact bg-base-100 shadow-xl relative">
@@ -26,7 +72,7 @@ const Card = ({ item }) => {
                     <p>If a dog chews shoes whose shoes does he choose?</p>
                     <div className="card-actions justify-between items-center">
                         <h2 className="card-title font-bold"><span className="text-red">$</span>{item.price}</h2>
-                        <button className="btn bg-green text-white">Buy Now</button>
+                        <button onClick={() => handldeAddToCart(item)} className="btn bg-green text-white">Add To Cart</button>
                     </div>
                 </div>
             </div>

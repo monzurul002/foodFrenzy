@@ -32,9 +32,10 @@ const AuthProviders = ({ children }) => {
         })
     }
 
+    //logout 
     const logOut = () => {
+        setLoading(true)
         return signOut(auth)
-
     }
     //get current user
     useEffect(() => {

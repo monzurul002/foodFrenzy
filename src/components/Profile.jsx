@@ -37,7 +37,7 @@ const Profile = () => {
                     <li><Link to="/updateprofile">Profile</Link ></li>
 
                     {
-                        user ? <li><button onClick={handleLogOut} className="bg-red btn py-4 text-white">Logout</button></li> : <li><button className="bg-red btn py-4 text-white">Login</button></li>
+                        user ? <li><button onClick={() => handleLogOut()} className="bg-red btn py-4 text-white">Logout</button></li> : <li><button className="bg-red btn py-4 text-white">Login</button></li>
                     }
 
 
