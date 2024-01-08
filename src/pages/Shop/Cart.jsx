@@ -80,7 +80,7 @@ const Cart = () => {
             return Swal.fire({
                 title: "Opps",
                 text: "Quantity can not be less than 1.",
-                icon: "error"
+                icon: "warning"
             });
         }
 

@@ -33,7 +33,7 @@ const Navbar = () => {
 
 
     const navitems = <>
-        <li><a>Home</a></li>
+        <li><Link to="/" >Home</Link ></li>
         <li>
             <details>
                 <summary>Menu</summary>
