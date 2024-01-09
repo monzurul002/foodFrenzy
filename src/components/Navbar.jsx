@@ -56,7 +56,9 @@ const Navbar = () => {
                 </ul>
             </details>
         </li>
-        <li><a>Offers</a></li></>
+        <li><a>Offers</a></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
+    </>
     return (
         <header className="max-w-screen-2xl fixed top-0 z-20 right-0 left-0 transition-all duration-300 ease-in-out">
             <div className={`navbar lg:px-12 ${isSticky ? "shadow-xl bg-base-100 transition-all duration-300 ease-in-out" : ""}`}>

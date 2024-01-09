@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateProfile from "../pages/Dashboard/updateProfile";
 import Cart from "../pages/Shop/Cart";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,13 @@ const router = createBrowserRouter([
     {
         path: "/signup",
         element: <Signup />
-    }
+
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard />
+
+    },
 ])
 
 export default router;
