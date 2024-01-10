@@ -57,6 +57,7 @@ const Navbar = () => {
             </details>
         </li>
         <li><a>Offers</a></li>
+        <li><a>New Food</a></li>
         <li><Link to="/dashboard">Dashboard</Link></li>
     </>
     return (

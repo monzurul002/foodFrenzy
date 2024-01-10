@@ -1,71 +1,85 @@
-import { useState } from "react";
-import { RiMenu2Line } from "react-icons/ri";
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthProviders";
+import img1 from "../../assets/images/dashboard/download1.png"
+import img2 from "../../assets/images/dashboard/download2.png"
+import img3 from "../../assets/images/dashboard/download3.png"
+import img4 from "../../assets/images/dashboard/download4.png"
+import { FaArrowDownLong, FaArrowUpLong } from "react-icons/fa6";
 
-import logo from "../../assets/logo.png"
-const Dashboard = () => {
-    const [isOpen, setIsOpen] = useState(true)
+const AdminDashboard = () => {
+    const { user } = useContext(AuthContext)
     return (
-        <div>
-            <div className="drawer lg:drawer-open">
-                <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col  ">
-                    <div className="navbar bg-base-100">
-                        {/* toggle btn */}
-                        <div htmlFor="my-drawer-2" onClick={() => setIsOpen(!isOpen)} className="navbar-start hidden  md:block">
-                            <div role="button" className="btn btn-ghost btn-circle">
-                                <RiMenu2Line />
-
+        <div className="p-4 bg-slate-100 h-screen ">
+            <div>
+                <h2 className="text-2xl font-bold">Welcome, {user?.displayName}</h2>
+                <div className="grid grid-cols-1 space-y-3 space-x-8 mt-4 md:grid-cols-4">
+                    {/* chart-1 */}
+                    <div className=" h-44 relative bg-white mt-3  ml-2 md:md-7 " >
+                        <img src={img1} className="mt-14 w-full" alt="" />
+                        <div className="absolute top-3 flex justify-between space-x-5   left-6 pb-4">
+                            <div className="">
+                                <p className="font-semibold">Sells  Graph</p>
+                                <h4 className="font-bold text-red text-xl">$85466</h4>
                             </div>
-
-                        </div>
-                        <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden"><RiMenu2Line />
-                        </label>
-
-
-
-
-                        <div className="navbar-center">
-                            <a className="btn btn-ghost text-xl">daisyUI</a>
-                        </div>
-                        <div className="navbar-end">
-                            <button className="btn btn-ghost btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                            </button>
-                            <button className="btn btn-ghost btn-circle">
-                                <div className="indicator">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                                    <span className="badge badge-xs badge-primary indicator-item"></span>
-                                </div>
-                            </button>
+                            <button className="btn btn-xs bg-black text-white"><FaArrowUpLong />
+                                3.2% </button>
                         </div>
                     </div>
-
-
-
-                    {/* Page content here */}
+                    {/* chart-2 */}
+                    <div className=" h-44 relative bg-white ml-2 md:md-7 " >
+                        <img src={img2} className="mt-16 w-full" alt="" />
+                        <div className="absolute top-2  flex justify-between space-x-5   left-6 ">
+                            <div className="">
+                                <p className="font-semibold">Total Visitors</p>
+                                <h4 className="font-bold text-xl">466</h4>
+                            </div>
+                            <button className="btn btn-xs bg-black text-white"><FaArrowUpLong className="text-green" />
+                                3.2% </button>
+                        </div>
+                    </div>
+                    {/* chart-1 */}
+                    <div className=" h-44 relative bg-white ml-2 md:md-7 " >
+                        <img src={img3} className="mt-16 w-full" alt="" />
+                        <div className="absolute top-3 flex justify-between space-x-5   left-6 py-1">
+                            <div className="">
+                                <p className="font-semibold">New Users</p>
+                                <h4 className="font-bold text-red text-xl">5466</h4>
+                            </div>
+                            <button className="btn btn-xs bg-black text-white"><FaArrowUpLong className="text-green" />
+                                4.2% </button>
+                        </div>
+                    </div>
+                    {/* chart-4 */}
+                    <div className=" relative h-44 bg-white ml-2 md:md-7 " >
+                        <img src={img4} className="mt-16 w-full" alt="" />
+                        <div className="absolute top-3 flex justify-between space-x-5   left-6 py-1">
+                            <div className="">
+                                <p className="font-semibold">Total Orders
+                                </p>
+                                <h4 className="font-bold text-red text-xl">466</h4>
+                            </div>
+                            <button className="btn btn-xs bg-red text-white"><FaArrowDownLong />
+                                8.2% </button>
+                        </div>
+                    </div>
 
 
                 </div>
-                {
-                    isOpen && <div className="drawer-side">
-                        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                            <div className="m-3">
-                                <img src={logo} alt="" />
-                            </div>
 
-                            {/* Sidebar content here */}
-                            <li><a>Sidebar Item 1</a></li>
-                            <li><a>Sidebar Item 2</a></li>
-                        </ul>
+                <div className="my-3">
+                    <h2 className="text-2xl font-bold">RECENT ORDERS REQUESTED
+                    </h2>
+                </div>
 
-                    </div>
-                }
+                <div className="my-2">
+                    <h2 className="text-xl ">TRENDING ORDERS
+                    </h2>
 
+                </div>
 
             </div>
         </div>
     );
 };
 
-export default Dashboard;
+export default AdminDashboard;
