@@ -16,7 +16,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:5000/menu');
+                const res = await fetch('https://food-frenzy-server-delta.vercel.app/menu');
                 const data = await res.json();
                 setMenu(data)
                 setFilteredItems(data)

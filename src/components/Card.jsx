@@ -34,7 +34,7 @@ const Card = ({ item }) => {
         if (user && user?.email) {
             const cartItem = { menuItemId: _id, name, image, price, quantity: 1, email: user?.email, recipe, category }
             console.log(cartItem);
-            fetch("http://localhost:5000/cart", {
+            fetch("https://food-frenzy-server-delta.vercel.app/cart", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -44,7 +44,7 @@ const AuthProviders = ({ children }) => {
             if (currUser) {
                 setUser(currUser);
                 setLoading(false)
-                fetch("http://localhost:5000/jwt", {
+                fetch("https://food-frenzy-server-delta.vercel.app/jwt", {
                     method: "POST"
                 })
                     .then(res => res.json())

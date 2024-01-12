@@ -8,7 +8,7 @@ const MyItem = () => {
     const { user } = useContext(AuthContext)
     const { data: myItems = [], refetch } = useQuery({
         queryKey: ["myItems", user?.email], queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/menu/myitem/${user?.email}`)
+            const res = await fetch(`https://food-frenzy-server-delta.vercel.app/menu/myitem/${user?.email}`)
             return res.json()
         }
     })
@@ -24,7 +24,7 @@ const MyItem = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/menu/${item._id}`)
+                axios.delete(`https://food-frenzy-server-delta.vercel.app/menu/${item._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()

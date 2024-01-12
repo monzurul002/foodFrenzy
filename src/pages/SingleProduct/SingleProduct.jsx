@@ -7,7 +7,7 @@ const SingleProduct = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/menu/single/${id}`)
+        fetch(`https://food-frenzy-server-delta.vercel.app/menu/single/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [])

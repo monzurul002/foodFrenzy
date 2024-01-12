@@ -29,7 +29,7 @@ const AddItem = () => {
         formData.append("recipe", recipe)
         formData.append('image', image)
         formData.append("email", user.email)
-        fetch("http://localhost:5000/menu/addItem", {
+        fetch("https://food-frenzy-server-delta.vercel.app/menu/addItem", {
             method: "POST",
             body: formData,
         }).then(res => res.json())
