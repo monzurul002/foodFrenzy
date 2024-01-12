@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../Contexts/AuthProviders";
+import useUserDb from "../hooks/useUserDb";
 
 const Signup = () => {
     const {
@@ -14,6 +15,7 @@ const Signup = () => {
     const { user, createNewUser } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
+
     const from = location.state?.from?.pathname || "/"
     const onSubmit = (data) => {
 
@@ -24,8 +26,11 @@ const Signup = () => {
         createNewUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+
                 if (user) {
+                    useUserDb(user)
+                        .then(res => res.json())
+                        .then(data => { })
                     alert("Successfully crated user")
                     return navigate(from)
                 }
@@ -34,6 +39,8 @@ const Signup = () => {
                 const message = error?.message;
             })
     }
+
+
 
     return (
         <div>

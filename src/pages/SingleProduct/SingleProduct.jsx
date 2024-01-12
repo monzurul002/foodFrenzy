@@ -7,7 +7,11 @@ const SingleProduct = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://food-frenzy-server-delta.vercel.app/menu/single/${id}`)
+        fetch(`http://localhost:5000/menu/single/${id}`, {
+            headers: {
+                "authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [])

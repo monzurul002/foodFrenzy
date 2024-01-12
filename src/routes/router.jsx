@@ -12,6 +12,7 @@ import AddItem from "../pages/Dashboard/AddItem";
 import AdminDashboard from "../pages/Dashboard/Dashboard";
 import MyItem from "../pages/Dashboard/MyItem";
 import WishList from "../components/WishList";
+import BookTable from "../pages/BookTable/BookTable";
 
 
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: "wishlist",
                 element: <WishList />
+            },
+            {
+                path: "booktable",
+                element: <BookTable />
             },
         ]
 

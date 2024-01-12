@@ -14,17 +14,14 @@ const Cart = () => {
     const calculatePrice = (item) => {
         return item.price * item.quantity
     }
-
-
-
-
     //increase quantity
     const handleIncrease = (item) => {
         if (item.quantity > 1) {
-            fetch(`https://food-frenzy-server-delta.vercel.app/cart/${item._id}`, {
+            fetch(`http://localhost:5000/cart/${item._id}`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({ quantity: item.quantity + 1 })
             }).then(res => res.json())
@@ -56,10 +53,11 @@ const Cart = () => {
 
         if (item?.quantity > 1) {
 
-            fetch(`https://food-frenzy-server-delta.vercel.app/cart/${item._id}`, {
+            fetch(`http://localhost:5000/cart/${item._id}`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({ quantity: item.quantity - 1 })
             }).then(res => res.json())
@@ -104,8 +102,11 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://food-frenzy-server-delta.vercel.app/cart/${item._id}`, {
-                    method: "DELETE"
+                fetch(`http://localhost:5000/cart/${item._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
                 })
                     .then(res => res.json())
                     .then(data => {

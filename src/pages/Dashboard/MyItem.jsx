@@ -8,7 +8,7 @@ const MyItem = () => {
     const { user } = useContext(AuthContext)
     const { data: myItems = [], refetch } = useQuery({
         queryKey: ["myItems", user?.email], queryFn: async () => {
-            const res = await fetch(`https://food-frenzy-server-delta.vercel.app/menu/myitem/${user?.email}`)
+            const res = await fetch(`http://localhost:5000/menu/myitem/${user?.email}`)
             return res.json()
         }
     })
@@ -24,7 +24,11 @@ const MyItem = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`https://food-frenzy-server-delta.vercel.app/menu/${item._id}`)
+                axios.delete(`http://localhost:5000/menu/${item._id}`, {
+                    headers: {
+                        "authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()
@@ -40,10 +44,8 @@ const MyItem = () => {
 
             }
         });
-
-
-
     }
+    console.log(myItems);
     return (
         <div>
             <h2 className="text-3xl text-center text-green font-bold pt-3">My Added <span className="text-red inline-block" >Items</span></h2>
@@ -66,7 +68,7 @@ const MyItem = () => {
 
 
                         {
-                            myItems.map((item, index) => {
+                            myItems ? myItems?.map((item, index) => {
                                 return <tr key={item._id}>
                                     <th>
                                         {index + 1}
@@ -94,7 +96,7 @@ const MyItem = () => {
                                         <button onClick={() => handleDelete(item)} className="text-2xl text-red"><FaDeleteLeft></FaDeleteLeft> </button>
                                     </th>
                                 </tr>
-                            })
+                            }) : <h1 className="text-2xl text-green ">"You haven't added item yet."</h1>
                         }
 
                     </tbody>

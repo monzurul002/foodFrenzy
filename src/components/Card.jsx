@@ -19,7 +19,6 @@ const Card = ({ item }) => {
         // Get wishList from localStorage
         const getItemsFromLocalStorage = localStorage.getItem("wishList");
 
-
         // Parse the JSON string to get an array
         const wishItems = getItemsFromLocalStorage ? JSON.parse(getItemsFromLocalStorage) : [];
 
@@ -34,11 +33,8 @@ const Card = ({ item }) => {
         if (user && user?.email) {
             const cartItem = { menuItemId: _id, name, image, price, quantity: 1, email: user?.email, recipe, category }
             console.log(cartItem);
-            fetch("https://food-frenzy-server-delta.vercel.app/cart", {
+            fetch("http://localhost:5000/cart", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
                 body: JSON.stringify(cartItem)
             })
                 .then(res => res.json())

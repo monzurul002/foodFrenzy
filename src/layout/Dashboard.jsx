@@ -68,6 +68,9 @@ const Dashboard = () => {
                             <li className="hover:bg-green hover:text-white"><Link to="/dashboard/wishlist"> <MdOutlineFoodBank />
 
                                 Wish List</Link></li>
+                            <li className="hover:bg-green hover:text-white"><Link to="/dashboard/booktable"> <MdOutlineFoodBank />
+
+                                Book A Table</Link></li>
                             <li className="hover:bg-green hover:text-white"><a>
                                 <LiaFileInvoiceSolid />
                                 Invoice</a></li>

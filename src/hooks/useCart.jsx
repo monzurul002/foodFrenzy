@@ -9,7 +9,11 @@ const useCart = () => {
     const { data: cart = [], refetch } = useQuery({
         queryKey: ["cart", user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://food-frenzy-server-delta.vercel.app/cart/${user?.email}`)
+            const res = await fetch(`http://localhost:5000/cart/${user?.email}`, {
+                headers: {
+                    "authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             return res.json()
 
         }

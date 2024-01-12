@@ -38,33 +38,6 @@ const AuthProviders = ({ children }) => {
         setLoading(true)
         return signOut(auth)
     }
-    //get current user
-    useEffect(() => {
-        const unsubScribe = onAuthStateChanged(auth, (currUser) => {
-            if (currUser) {
-                setUser(currUser);
-                setLoading(false)
-                fetch("https://food-frenzy-server-delta.vercel.app/jwt", {
-                    method: "POST"
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        localStorage.setItem("token", data.token)
-                    })
-
-
-
-
-            } else {
-
-            }
-        })
-        return () => [
-            unsubScribe()
-        ]
-
-    }, [])
 
 
     const authInfo = {
@@ -77,6 +50,44 @@ const AuthProviders = ({ children }) => {
         updateProfile,
         updateUserProfile
     }
+
+    //user saved in db
+    fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify()
+    })
+
+
+    //get current user
+    useEffect(() => {
+        const unsubScribe = onAuthStateChanged(auth, (currUser) => {
+            if (currUser) {
+                setUser(currUser);
+                setLoading(false)
+                fetch("http://localhost:5000/jwt", {
+                    method: "POST"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+
+                        localStorage.setItem("token", data.token)
+                    })
+
+
+            } else {
+                localStorage.removeItem("token")
+            }
+        })
+        return () => [
+            unsubScribe()
+        ]
+
+    }, [])
+
 
 
 
