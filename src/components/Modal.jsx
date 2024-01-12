@@ -27,6 +27,7 @@ const Modal = () => {
                 if (user) {
 
                     alert("Successfully login")
+                    document.getElementById('my_modal_5').close()
                     return navigate(from, { replace: true })
                 }
                 setErrorMessage("")
@@ -48,6 +49,7 @@ const Modal = () => {
                 const user = result.user;
                 if (user) {
                     alert("Login Successfull")
+                    document.getElementById('my_modal_5').close()
                     return navigate(from, { replace: true })
                 }
             })

@@ -10,7 +10,8 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Dashboard from "../layout/Dashboard";
 import AddItem from "../pages/Dashboard/AddItem";
 import AdminDashboard from "../pages/Dashboard/Dashboard";
-
+import MyItem from "../pages/Dashboard/MyItem";
+import WishList from "../components/WishList";
 
 
 const router = createBrowserRouter([
@@ -58,7 +59,15 @@ const router = createBrowserRouter([
             {
                 path: "additem",
                 element: <AddItem></AddItem>
-            }
+            },
+            {
+                path: "myitem",
+                element: <MyItem />
+            },
+            {
+                path: "wishlist",
+                element: <WishList />
+            },
         ]
 
     },

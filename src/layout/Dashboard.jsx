@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdOutlineFoodBank } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
 
@@ -8,8 +8,6 @@ import logo from "../assets/logo.png"
 
 import { Link, Outlet } from "react-router-dom";
 
-import MainDashboard from "../pages/Dashboard/Dashboard";
-import AddItem from "../pages/Dashboard/AddItem";
 const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(true)
     return (
@@ -56,7 +54,7 @@ const Dashboard = () => {
                 {
                     isOpen && <div className="drawer-side shadow-2xl">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay "></label>
-                        <ul className="menu p-4 w-80 min-h-full  text-base-content">
+                        <ul className="menu p-4 w-80 min-h-full  text-md text-base-content">
                             <div className="m-3">
                                 <Link to="/"><img src={logo} alt="" /></Link>
                             </div>
@@ -66,6 +64,10 @@ const Dashboard = () => {
                             </Link></li>
                             <li className="hover:bg-green hover:text-white"><Link to="/dashboard/additem"> <IoMdAddCircleOutline />
                                 Add Item</Link></li>
+                            <li className="hover:bg-green hover:text-white"><Link to="/dashboard/myitem"> <MdOutlineFoodBank /> My Item</Link> </li>
+                            <li className="hover:bg-green hover:text-white"><Link to="/dashboard/wishlist"> <MdOutlineFoodBank />
+
+                                Wish List</Link></li>
                             <li className="hover:bg-green hover:text-white"><a>
                                 <LiaFileInvoiceSolid />
                                 Invoice</a></li>

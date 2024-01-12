@@ -11,6 +11,7 @@ const AuthProviders = ({ children }) => {
     // google auth Provider
     const provider = new GoogleAuthProvider()
     const googleSignIn = () => {
+
         return signInWithPopup(auth, provider)
     }
 
@@ -43,6 +44,18 @@ const AuthProviders = ({ children }) => {
             if (currUser) {
                 setUser(currUser);
                 setLoading(false)
+                fetch("http://localhost:5000/jwt", {
+                    method: "POST"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem("token", data.token)
+                    })
+
+
+
+
             } else {
 
             }

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthProviders";
@@ -12,8 +12,9 @@ const Signup = () => {
         formState: { errors },
     } = useForm()
     const { user, createNewUser } = useContext(AuthContext)
-
-
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || "/"
     const onSubmit = (data) => {
 
         const email = data.email;
@@ -25,7 +26,8 @@ const Signup = () => {
                 const user = result.user;
                 console.log(user);
                 if (user) {
-                    return alert("Successfully crated user")
+                    alert("Successfully crated user")
+                    return navigate(from)
                 }
             })
             .catch(error => {
@@ -35,7 +37,7 @@ const Signup = () => {
 
     return (
         <div>
-            <div className="right-3 absolute top-3"> <button >  <Link to='/'> ✕ </Link></button></div>
+            <div className="right-3 absolute top-16"> <button >  <Link to='/'> ✕ </Link></button></div>
             <div className=" flex flex-col my-10 justify-center items-center ">
 
                 <div className="  flex flex-col w-11/12 md:w-2/6 ">

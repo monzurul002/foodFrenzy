@@ -6,7 +6,9 @@ import { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthProviders";
 const Main = () => {
     const { loading } = useContext(AuthContext);
-
+    // if (loading) {
+    //     return <h1>Loading</h1>
+    // }
     return (
         <div>
             <Navbar></Navbar>

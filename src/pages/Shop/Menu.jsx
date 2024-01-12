@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import Card from "../../components/Card";
 import { FaFilter } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthProviders";
 
 const Menu = () => {
     const [menu, setMenu] = useState([]);
@@ -75,11 +76,6 @@ const Menu = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-
-
-
-
 
 
     return (

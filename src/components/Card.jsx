@@ -13,9 +13,23 @@ const Card = ({ item }) => {
     const { refetch } = useCart()
     const navigate = useNavigate();
     const location = useLocation()
-    const handleHeartClick = () => {
-        setIsHeartedFilled(!isHeartedFilled)
-    }
+    const handleHeartClick = (item) => {
+        setIsHeartedFilled(!isHeartedFilled);
+
+        // Get wishList from localStorage
+        const getItemsFromLocalStorage = localStorage.getItem("wishList");
+
+
+        // Parse the JSON string to get an array
+        const wishItems = getItemsFromLocalStorage ? JSON.parse(getItemsFromLocalStorage) : [];
+
+        // Add the new item to the array
+        wishItems.push(item);
+
+        // Save the updated array back to localStorage
+        localStorage.setItem("wishList", JSON.stringify(wishItems));
+    };
+
     const handldeAddToCart = (item) => {
         if (user && user?.email) {
             const cartItem = { menuItemId: _id, name, image, price, quantity: 1, email: user?.email, recipe, category }
@@ -58,7 +72,7 @@ const Card = ({ item }) => {
     return (
         <div className="mx-4">
             <div className="card card-compact bg-base-100 shadow-xl relative">
-                <div onClick={handleHeartClick} className={`absolute rating heartIcon text-xl  px-3 py-2 gap-1 right-2 cursor-pointer bg-green ${isHeartedFilled ? "text-rose-500" : "text-white"} `}>
+                <div onClick={() => handleHeartClick(item)} className={`absolute rating heartIcon text-xl  px-3 py-2 gap-1 right-2 cursor-pointer bg-green ${isHeartedFilled ? "text-rose-500" : "text-white"} `}>
                     <IoIosHeart className="text-xl" />
 
 
